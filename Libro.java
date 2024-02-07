@@ -77,7 +77,11 @@ public class Libro extends Biblioteca{
 		this.dataPubblicazione = dataPubblicazione;
 	}
 	
-	public String toString() {
+	public String stampaLibro() {
 		return ("Titolo: " + titolo + " / Autore: " + autore + " / Editore: " + editore + " / Numero pagine:" + numPagine + " / Codice ISBN: " + codISBN + " / Prezzo: " + prezzo + " / Data pubblicazione: " + dataPubblicazione );
+	}
+	
+	public String toString() {
+		return (titolo + ";" + autore + ";" + editore + ";" + numPagine + ";" + codISBN + ";" + prezzo + ";" + dataPubblicazione );
 	}
 }
