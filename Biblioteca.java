@@ -86,6 +86,81 @@ public class Biblioteca {
 		
 	}
 	
+	public void ricercaLibro(int scelta) {
+		Scanner scanner = new Scanner(System.in);
+		String ricercaString;
+		int ricercaInt;
+		switch(scelta) {
+			case 1:
+				
+				System.out.println("Inserire titolo da cercare:");
+				ricercaString = scanner.nextLine();
+				for(int i = 0; i<libri.length;i++) {
+					if(libri[i] != null)
+						if(libri[i].getTitolo() == ricercaString)
+							System.out.println(i + "-" + libri[i]);
+				}
+				break;
+			case 2:
+				System.out.println("Inserire autore da cercare:");
+				ricercaString = scanner.nextLine();
+				for(int i = 0; i<libri.length;i++) {
+					if(libri[i] != null)
+						if(libri[i].getAutore() == ricercaString)
+							System.out.println(i + "-" + libri[i]);
+				}
+				break;
+			case 3:
+				System.out.println("Inserire editore da cercare:");
+				ricercaString = scanner.nextLine();
+				for(int i = 0; i<libri.length;i++) {
+					if(libri[i] != null)
+						if(libri[i].getAutore() == ricercaString)
+							System.out.println(i + "-" + libri[i]);
+				}
+				break;
+			case 4:
+				System.out.println("Inserire numero pagine da cercare:");
+				ricercaInt = scanner.nextInt();
+				for(int i = 0; i<libri.length;i++) {
+					if(libri[i] != null)
+						if(libri[i].getNumPagine() == ricercaInt)
+							System.out.println(i + "-" + libri[i]);
+				}
+				break;
+			case 5:
+				System.out.println("Inserire codice ISBN da cercare:");
+				ricercaInt = scanner.nextInt();
+				for(int i = 0; i<libri.length;i++) {
+					if(libri[i] != null)
+						if(libri[i].getCodISBN() == ricercaInt)
+							System.out.println(i + "-" + libri[i]);
+				}
+				break;
+			case 6:
+				System.out.println("Inserire prezzo da cercare:");
+				double ricerca = scanner.nextDouble();
+				for(int i = 0; i<libri.length;i++) {
+					if(libri[i] != null)
+						if(libri[i].getPrezzo() == ricerca)
+							System.out.println(i + "-" + libri[i]);
+				}
+				break;
+			case 7:
+				System.out.println("Inserire data di pubblicazione da cercare:  (formato gg/mm/aaaa)");
+				scanner.nextLine();
+				String data = scanner.nextLine();
+				LocalDate data1 = dateInput(data);
+				for(int i = 0; i<libri.length;i++) {
+					if(libri[i] != null)
+						if(libri[i].getDataPubblicazione() == data1)
+							System.out.println(i + "-" + libri[i]);
+				}
+				break;
+				
+		}
+	}
+	
 	public static LocalDate dateInput(String userInput) {
 
 	    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -117,6 +192,7 @@ public class Biblioteca {
 	public static void main(String[] args) {
 		Biblioteca biblioteca = new Biblioteca();
 		int scelta;
+		
 		Scanner scanner = new Scanner(System.in);
 		do {
 			System.out.println("1- Aggiungi un libro");
@@ -151,13 +227,10 @@ public class Biblioteca {
 					break;
 				case 2:
 					int i=0;
-					boolean fine = false;
 					System.out.println("Scegli un libro inserendo il numero:");
-					while(i<biblioteca.libri.length && !fine) {
+					while(i<biblioteca.libri.length) {
 						if(biblioteca.libri[i] != null)
 							System.out.println("Libro " + i + "\nTitolo=" + biblioteca.libri[i].getTitolo());
-						else
-							fine = true;
 						i++;
 					}
 					int modifica = scanner.nextInt();
@@ -166,18 +239,16 @@ public class Biblioteca {
 				case 3: 
 					break;
 				case 4:
-					boolean end = false;
+					DatiLibro[] dati = DatiLibro.values(); 
 					int visualizza = 0, j =0;
-					System.out.println("Scegli il libro da visualizzare:");
-					while(j<biblioteca.libri.length && !end) {
-						if(biblioteca.libri[j] != null)
-							System.out.println("Libro " + j + "\nTitolo=" + biblioteca.libri[j].getTitolo());
-						else
-							fine = true;
-						j++;
-					}
+					System.out.println("In base a cosa vuoi visualizzare i libri?");
+					for( j=0; j<DatiLibro.values().length; j++)
+						System.out.println(j + "-" + dati[j].name());
+					scelta = scanner.nextInt();
+
+					
 					visualizza = scanner.nextInt();
-					System.out.println(biblioteca.libri[visualizza]);
+					System.out.println(biblioteca.libri[visualizza-1]);
 					break;
 			}
 			salvaLibriInFile(biblioteca.libri);
