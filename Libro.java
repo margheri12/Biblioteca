@@ -82,6 +82,6 @@ public class Libro extends Biblioteca{
 	}
 	
 	public String toString() {
-		return (titolo + ";" + autore + ";" + editore + ";" + numPagine + ";" + codISBN + ";" + prezzo + ";" + dataPubblicazione );
+		return (titolo + "/" + autore + "/" + editore + "/" + numPagine + "/" + codISBN + "/" + prezzo + "/" + dataPubblicazione );
 	}
 }
