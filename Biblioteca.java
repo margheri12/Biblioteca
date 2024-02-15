@@ -37,12 +37,16 @@ public class Biblioteca {
 		boolean inserito = false;
 
 		while (i < libri.length && !inserito) {
+			if(libri[libri.length-1] != null) {
+				System.out.println("Capacita' massima di libri raggiunta");
+				inserito = true;
+			}
 			if (libri[i] == null) {
 				libri[i] = libro;
 				inserito = true;
 				System.out.println("Libro inserito correttamente");
-			} else
-				System.out.println("Capacita' massima di libri raggiunta");
+			}
+			
 			i++;
 		}
 	}
@@ -69,7 +73,7 @@ public class Biblioteca {
 		int modificaInt = scanner.nextInt();
 		try {
 			System.out.println("Cosa vuoi modificare del libro " + libri[modificaInt - 1].getTitolo() + "?");
-			for (int j = 0; i < DatiLibro.values().length; i++)
+			for (int j = 0; j < dati.length; j++)
 				System.out.println((j + 1) + "-" + dati[j].name());
 			scelta = scanner.nextInt();
 			switch (scelta) {
@@ -128,13 +132,13 @@ public class Biblioteca {
 	public void rimozioneLibro() {
 		System.out.println("Inserire libro da rimuovere");
 		int i = 0;
-		while (i<libri.length) {
-			if(libri[i] != null) {
+		while (i < libri.length) {
+			if (libri[i] != null) {
 				System.out.println((i + 1) + "- " + libri[i].stampaLibro());
 			}
 			i++;
 		}
-		
+
 		Scanner scanner = new Scanner(System.in);
 		int rimuovi = scanner.nextInt();
 		libri[rimuovi - 1] = null;
@@ -163,68 +167,69 @@ public class Biblioteca {
 
 		int sceltaLibro = scanner.nextInt();
 		switch (sceltaLibro) {
-		case 1:
-
-			System.out.println("Inserire titolo da cercare:");
-			ricercaString = scanner.nextLine();
-			for (int i = 0; i < libri.length; i++) {
-				if (libri[i] != null && libri[i].getTitolo().equals(ricercaString))
-					System.out.println((i + 1) + "-" + libri[i].stampaLibro());
-			}
-			break;
-		case 2:
-			System.out.println("Inserire autore da cercare:");
-			ricercaString = scanner.nextLine();
-			for (int i = 0; i < libri.length; i++) {
-				if (libri[i] != null && libri[i].getAutore().equals(ricercaString))
-					System.out.println((i + 1) + "-" + libri[i].stampaLibro());
-			}
-			break;
-		case 3:
-			System.out.println("Inserire editore da cercare:");
-			ricercaString = scanner.nextLine();
-			for (int i = 0; i < libri.length; i++) {
-				if (libri[i] != null && libri[i].getAutore().equals(ricercaString))
-					System.out.println((i + 1) + "-" + libri[i].stampaLibro());
-			}
-			break;
-		case 4:
-			System.out.println("Inserire numero pagine da cercare:");
-			ricercaInt = scanner.nextInt();
-			for (int i = 0; i < libri.length; i++) {
-				if (libri[i] != null && libri[i].getNumPagine() == ricercaInt)
-					System.out.println((i + 1) + "-" + libri[i].stampaLibro());
-			}
-			break;
-		case 5:
-			System.out.println("Inserire codice ISBN da cercare:");
-			ricercaInt = scanner.nextInt();
-			for (int i = 0; i < libri.length; i++) {
-				if (libri[i] != null && libri[i].getCodISBN() == ricercaInt)
-					System.out.println((i + 1) + "-" + libri[i].stampaLibro());
-			}
-			break;
-		case 6:
-			System.out.println("Inserire prezzo da cercare:");
-			double ricerca = scanner.nextDouble();
-			for (int i = 0; i < libri.length; i++) {
-				if (libri[i] != null && libri[i].getPrezzo() == ricerca)
-					System.out.println((i + 1) + "-" + libri[i].stampaLibro());
-			}
-			break;
-		case 7:
-			System.out.println("Inserire data di pubblicazione da cercare:  (formato AAAA-MM-GG)");
-			String data = scanner.nextLine();
-			LocalDate data1 = dateInput(data);
-			for (int i = 0; i < libri.length; i++) {
-				if (libri[i] != null && libri[i].getDataPubblicazione().equals(data1))
-					System.out.println((i + 1) + "-" + libri[i].stampaLibro());
-			}
-			break;
-		default:
-			System.out.println("Hai inserito un numero non valido");
+			case 1:
+	
+				System.out.println("Inserire titolo da cercare:");
+				ricercaString = scanner.nextLine();
+				for (int i = 0; i < libri.length; i++) {
+					if (libri[i] != null && libri[i].getTitolo().equals(ricercaString))
+						System.out.println((i + 1) + "-" + libri[i].stampaLibro());
+				}
+				break;
+			case 2:
+				System.out.println("Inserire autore da cercare:");
+				ricercaString = scanner.nextLine();
+				for (int i = 0; i < libri.length; i++) {
+					if (libri[i] != null && libri[i].getAutore().equals(ricercaString))
+						System.out.println((i + 1) + "-" + libri[i].stampaLibro());
+				}
+				break;
+			case 3:
+				System.out.println("Inserire editore da cercare:");
+				ricercaString = scanner.nextLine();
+				for (int i = 0; i < libri.length; i++) {
+					if (libri[i] != null && libri[i].getAutore().equals(ricercaString))
+						System.out.println((i + 1) + "-" + libri[i].stampaLibro());
+				}
+				break;
+			case 4:
+				System.out.println("Inserire numero pagine da cercare:");
+				ricercaInt = scanner.nextInt();
+				for (int i = 0; i < libri.length; i++) {
+					if (libri[i] != null && libri[i].getNumPagine() == ricercaInt)
+						System.out.println((i + 1) + "-" + libri[i].stampaLibro());
+				}
+				break;
+			case 5:
+				System.out.println("Inserire codice ISBN da cercare:");
+				ricercaInt = scanner.nextInt();
+				for (int i = 0; i < libri.length; i++) {
+					if (libri[i] != null && libri[i].getCodISBN() == ricercaInt)
+						System.out.println((i + 1) + "-" + libri[i].stampaLibro());
+				}
+				break;
+			case 6:
+				System.out.println("Inserire prezzo da cercare:");
+				double ricerca = scanner.nextDouble();
+				for (int i = 0; i < libri.length; i++) {
+					if (libri[i] != null && libri[i].getPrezzo() == ricerca)
+						System.out.println((i + 1) + "-" + libri[i].stampaLibro());
+				}
+				break;
+			case 7:
+				System.out.println("Inserire data di pubblicazione da cercare:  (formato AAAA-MM-GG)");
+				scanner.nextLine();
+				String data = scanner.nextLine();
+				LocalDate data1 = dateInput(data);
+				for (int i = 0; i < libri.length; i++) {
+					if (libri[i] != null && libri[i].getDataPubblicazione().equals(data1))
+						System.out.println((i + 1) + "-" + libri[i].stampaLibro());
+				}
+				break;
+			default:
+				System.out.println("Hai inserito un numero non valido");
 		}
-
+	
 	}
 
 	/**
@@ -272,7 +277,7 @@ public class Biblioteca {
 	 * @param percorsoFile Il percorso del file da cui caricare i libri.
 	 */
 	public void caricaLibriDaFile() {
-		String nomeFile="databaseBiblioteca.txt";
+		String nomeFile = "databaseBiblioteca.txt";
 		try (BufferedReader reader = new BufferedReader(new FileReader(nomeFile))) {
 			reader.readLine();
 			String linea = reader.readLine();
